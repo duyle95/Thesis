@@ -15,7 +15,7 @@ class App extends Component {
       <div className="container">
         <BrowserRouter>
           <div>
-            <Header></Header>
+            <Header name="Thesis-app" screenName="thesis" url="test-header.com"/>
             <Route exact path="/" component={Landing} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Signin} />
