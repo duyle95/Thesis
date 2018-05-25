@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Field, reduxForm } from "redux-form";
+import styled from "styled-components";
 
-import * as actions from '../../actions';
+import * as actions from "../../actions";
 
-const Input = styled.input.attrs()`
+const Input = styled.input`
   padding: 0.5em;
   color: palevioletred;
   background: papayawhip;
@@ -25,7 +25,7 @@ const Form = styled.form`
 
 const FormLabel = styled.label`
   font-size: 2em;
-  color: #EEAA7B;
+  color: #eeaa7b;
 `;
 
 const CenteredContainer = styled.div`
@@ -35,8 +35,8 @@ const CenteredContainer = styled.div`
 `;
 
 const Button = styled.button`
-  background: ${props => props.primary ? 'palevioletred' : 'white'};
-  color: ${props => props.primary ? 'white' : 'palevioletred'};
+  background: ${props => (props.primary ? "palevioletred" : "white")};
+  color: ${props => (props.primary ? "white" : "palevioletred")};
   font-size: 1.2em;
   margin: 1em auto;
   padding: 0.5em 2em;
@@ -45,30 +45,35 @@ const Button = styled.button`
 `;
 
 class Signin extends Component {
-  _onFormSubmit = (formValues) => {
-    // this.props.signinUser(formValues);
-    console.log(formValues);
-  }
+  _onFormSubmit = formValues => {
+    this.props.signinUser(formValues);
+  };
 
   render() {
     return (
-        <CenteredContainer>
-          <Form onSubmit={this.props.handleSubmit(this._onFormSubmit)}>
-            <div>
-              <FormLabel htmlFor="email">Email</FormLabel>
-              <Field name="email" component={Input} type="text" placeholder="awesome@email.com" onChange={(e) => console.log(e.target.value)} />
-            </div>
-            <div>
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <Field name="password" component={Input} type="password" />
-            </div>
-            <Button type="submit">Submit</Button>
-          </Form>
-        </CenteredContainer>
-    )
+      <CenteredContainer>
+        <Form onSubmit={this.props.handleSubmit(this._onFormSubmit)}>
+          <div>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <Field
+              name="email"
+              component={props => <Input {...props.input} type="email" />}
+            />
+          </div>
+          <div>
+            <FormLabel htmlFor="password">Password</FormLabel>
+            <Field
+              name="password"
+              component={props => <Input {...props.input} type="password" />}
+            />
+          </div>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </CenteredContainer>
+    );
   }
 }
 
 export default reduxForm({
-  form: 'signin',
+  form: "signin"
 })(connect(null, actions)(Signin));
