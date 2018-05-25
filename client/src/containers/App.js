@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import React, { Component } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 
-import Signin from './Auth/Signin';
-import Signup from './Auth/Signup';
+import Signin from "containers/Auth/Signin";
+import Signup from "containers/Auth/Signup";
 
-import Dashboard from './Survey/Dashboard';
+import Dashboard from "containers/Survey/Dashboard";
 
-import Header from './Header';
-import Landing from '../components/Landing';
+import Header from "containers/Header";
+import Landing from "components/Landing";
 
 class App extends Component {
   render() {
@@ -15,7 +15,11 @@ class App extends Component {
       <div className="container">
         <BrowserRouter>
           <div>
-            <Header name="Thesis-app" screenName="thesis" url="test-header.com"/>
+            <Header
+              name="Thesis-app"
+              screenName="thesis"
+              url="test-header.com"
+            />
             <Route exact path="/" component={Landing} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/signin" component={Signin} />

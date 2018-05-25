@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import styled from "styled-components";
 
-import * as actions from "../../actions";
+import * as actions from "actions";
 
 const Input = styled.input`
   padding: 0.5em;
