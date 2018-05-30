@@ -13,7 +13,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     require: true,
-    minlength: 8
+    minlength: 6
   }
 });
 
@@ -30,11 +30,13 @@ userSchema.pre("save", function(next) {
 
 userSchema.methods.comparePassword = function(candidatePassword, callback) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    if (err) { return callback(err); }
+    if (err) {
+      return callback(err);
+    }
 
     callback(null, isMatch);
-  })
-}
+  });
+};
 
 const User = mongoose.model("User", userSchema);
 

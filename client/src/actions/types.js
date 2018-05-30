@@ -1,2 +1,3 @@
-export const SIGN_IN_USER = 'sign_in_user';
-export const SIGN_UP_USER = 'sign_up_user';
+export const SIGNIN_USER = "signin_user";
+export const SIGNUP_USER = "signup_user";
+export const SIGNOUT_USER = "signout_user";

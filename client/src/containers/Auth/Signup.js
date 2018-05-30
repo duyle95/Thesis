@@ -4,17 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import * as actions from "actions";
 import styled from "styled-components";
 
-const Input = styled.input`
-  padding: 0.5em;
-  color: palevioletred;
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
-  display: block;
-  height: 30px;
-  font-size: 15pt;
-  margin: 0.5em 0;
-`;
+import Input from "components/InputText";
 
 const Form = styled.form`
   display: inline-block;
@@ -45,7 +35,9 @@ const Button = styled.button`
 
 class Signup extends Component {
   _onFormSubmit = formValues => {
-    console.log(formValues);
+    this.props.signupUser(formValues, () => {
+      this.props.history.push("/surveys");
+    });
   };
 
   render() {
@@ -54,12 +46,7 @@ class Signup extends Component {
         <Form onSubmit={this.props.handleSubmit(this._onFormSubmit)}>
           <div>
             <FormLabel htmlFor="email">Email</FormLabel>
-            <Field
-              name="email"
-              component={Input}
-              type="text"
-              placeholder="awesome@email.com"
-            />
+            <Field name="email" component={Input} type="email" />
           </div>
           <div>
             <FormLabel htmlFor="password">Password</FormLabel>
@@ -69,6 +56,7 @@ class Signup extends Component {
             <FormLabel htmlFor="passwordConfirm">Password Confirm</FormLabel>
             <Field name="passwordConfirm" component={Input} type="password" />
           </div>
+          {this.props.errorMessage}
           <Button type="submit">Submit</Button>
         </Form>
       </CenteredContainer>
@@ -76,6 +64,12 @@ class Signup extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    errorMessage: state.auth.errorMessage
+  };
+};
+
 export default reduxForm({
   form: "signup"
-})(connect(null, actions)(Signup));
+})(connect(mapStateToProps, actions)(Signup));

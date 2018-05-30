@@ -8,7 +8,15 @@ import reducers from "reducers";
 import App from "containers/App";
 import registerServiceWorker from "registerServiceWorker";
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const store = createStore(
+  reducers,
+  {
+    auth: {
+      isAuthenticated: localStorage.getItem("token") ? true : false
+    }
+  },
+  applyMiddleware(thunk)
+);
 
 ReactDOM.render(
   <Provider store={store}>

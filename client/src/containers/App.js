@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import Signin from "containers/Auth/Signin";
 import Signup from "containers/Auth/Signup";
+import Signout from "containers/Auth/Signout";
 
 import Dashboard from "containers/Survey/Dashboard";
 
@@ -15,15 +16,12 @@ class App extends Component {
       <div className="container">
         <BrowserRouter>
           <div>
-            <Header
-              name="Thesis-app"
-              screenName="thesis"
-              url="test-header.com"
-            />
+            <Header />
             <Route exact path="/" component={Landing} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/signin" component={Signin} />
-            <Route exact path="/surveys" component={Dashboard} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/signin" component={Signin} />
+            <Route path="/signout" component={Signout} />
+            <Route path="/surveys" component={Dashboard} />
           </div>
         </BrowserRouter>
       </div>
