@@ -75,7 +75,9 @@ class Header extends Component {
     } else {
       return (
         <div>
-          <StyledLink to="/signin">Sign in</StyledLink>
+          <StyledLink className="signin" to="/signin">
+            Sign in
+          </StyledLink>
           <StyledLink to="/signup">Sign up</StyledLink>
         </div>
       );

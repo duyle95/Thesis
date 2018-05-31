@@ -1,27 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
 
-import reducers from "reducers";
+import Root from "Root";
 import App from "containers/App";
 import registerServiceWorker from "registerServiceWorker";
 
-const store = createStore(
-  reducers,
-  {
-    auth: {
-      isAuthenticated: localStorage.getItem("token") ? true : false
-    }
-  },
-  applyMiddleware(thunk)
-);
-
 ReactDOM.render(
-  <Provider store={store}>
+  <Root>
     <App />
-  </Provider>,
+  </Root>,
   document.getElementById("root")
 );
 registerServiceWorker();
