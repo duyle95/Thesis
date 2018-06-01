@@ -6,7 +6,11 @@ export const signinUser = (
   redirectToDashboard
 ) => async dispatch => {
   try {
-    const response = await axios.post("/api/users/signin", { email, password });
+    const response = await axios.post("api/users/signin", {
+      email,
+      password
+    });
+    console.log(response.data);
     dispatch({
       type: SIGNIN_USER,
       payload: { isAuthenticated: true, errorMessage: "" }
@@ -15,6 +19,7 @@ export const signinUser = (
     localStorage.setItem("token", response.data.token);
     redirectToDashboard();
   } catch (e) {
+    console.log(e);
     dispatch({
       type: SIGNIN_USER,
       payload: {

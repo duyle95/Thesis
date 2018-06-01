@@ -3,14 +3,11 @@ import { mount } from "enzyme";
 import { MemoryRouter } from "react-router";
 
 import "services/localStorage";
-import setURL from "services/setURL";
 import Root from "Root";
 import App from "containers/App";
 import Header from "containers/Header";
 import Signin from "containers/Auth/Signin";
 import Signup from "containers/Auth/Signup";
-import Signout from "containers/Auth/Signout";
-import Dashboard from "containers/Survey/Dashboard";
 import Landing from "components/Landing";
 
 let wrapper;
@@ -29,13 +26,13 @@ afterEach(() => {
 });
 
 describe("<App />", () => {
-  it("should render Landing and Header components when navigating to '/' route", () => {
+  xit("should render Landing and Header components when navigating to '/' route", () => {
     wrapper = renderRoutes("/");
     expect(wrapper.find(Landing).length).toEqual(1);
     expect(wrapper.find(Header).length).toEqual(1);
   });
 
-  it("should navigate to '/' route when click to the logo", () => {
+  xit("should navigate to '/' route when click to the logo", () => {
     wrapper = renderRoutes("/");
     wrapper
       .find("Link")
@@ -47,7 +44,7 @@ describe("<App />", () => {
     expect(wrapper.find(Header).length).toEqual(1);
   });
 
-  it("should render Header and Signin components when navigating to '/signin' route", () => {
+  xit("should render Header and Signin components when navigating to '/signin' route", () => {
     wrapper = mount(
       <Root>
         <App />
@@ -63,7 +60,7 @@ describe("<App />", () => {
     expect(wrapper.find(Header).length).toEqual(1);
   });
 
-  it("should render Header and Signup components when navigating to '/signup' route", () => {
+  xit("should render Header and Signup components when navigating to '/signup' route", () => {
     wrapper = renderRoutes("/signup");
     wrapper
       .find("Link")

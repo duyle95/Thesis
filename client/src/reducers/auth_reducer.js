@@ -12,8 +12,6 @@ export default (state = INITIAL_STATE, action) => {
     case SIGNUP_USER:
       return { ...state, ...action.payload };
     case SIGNOUT_USER:
-      console.log(state);
-      console.log({ ...state, ...action.payload });
       return { ...state, ...action.payload };
     default:
       return state;
