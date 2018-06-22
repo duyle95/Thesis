@@ -14,6 +14,10 @@ const userSchema = new Schema({
     type: String,
     require: true,
     minlength: 6
+  },
+  credits: {
+    type: Number,
+    default: 0
   }
 });
 

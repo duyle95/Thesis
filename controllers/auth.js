@@ -8,7 +8,7 @@ const tokenForUser = user => {
 
 exports.signin = (req, res, next) => {
   res.json({ token: tokenForUser(req.user) });
-}
+};
 
 exports.signup = (req, res, next) => {
   const { email, password } = req.body;

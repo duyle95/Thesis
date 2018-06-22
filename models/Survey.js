@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const recipientsSchema = require("./Recipient");
 
 const surveySchema = new Schema({
   title: {
@@ -16,12 +17,11 @@ const surveySchema = new Schema({
   },
   _user: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: "User"
   },
   dateSent: Date,
-  lastResponded: Date
+  lastResponded: Date,
+  recipients: [recipientsSchema]
 });
 
-const Survey = mongoose.model('Survey', surveySchema);
-
-module.exports = { Survey };
+mongoose.model("Survey", surveySchema);
