@@ -10,7 +10,6 @@ export const signinUser = (
       email,
       password
     });
-    console.log(response.data);
     dispatch({
       type: SIGNIN_USER,
       payload: { isAuthenticated: true, errorMessage: "" }
@@ -19,7 +18,6 @@ export const signinUser = (
     localStorage.setItem("token", response.data.token);
     redirectToDashboard();
   } catch (e) {
-    console.log(e);
     dispatch({
       type: SIGNIN_USER,
       payload: {

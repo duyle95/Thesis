@@ -4,19 +4,26 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import reducers from "reducers";
 
+import { SIGNIN_USER } from "actions/types";
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default props => {
-  const INITIAL_STATE = {
-    auth: {
-      isAuthenticated: localStorage.getItem("token") ? true : false
-    }
-  };
-
   const store = createStore(
     reducers,
-    INITIAL_STATE,
+    {},
     composeEnhancers(applyMiddleware(thunk))
   );
+  const token = localStorage.getItem("token");
+  if (token) {
+    store.dispatch({
+      type: SIGNIN_USER,
+      payload: {
+        isAuthenticated: true,
+        errorMessage: ""
+      }
+    });
+  }
+
   return <Provider store={store}>{props.children}</Provider>;
 };
