@@ -1,16 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  FormInput,
+  FormLabel,
+  ErrorMessage
+} from "components/StyledComponents";
 
-const Input = styled.input`
-  padding: 0.5em;
-  color: palevioletred;
-  background: papayawhip;
-  border: none;
-  border-radius: 3px;
-  display: block;
-  height: 30px;
-  font-size: 15pt;
-  margin: 0.5em 0;
-`;
-
-export default props => <Input {...props.input} type={props.type} />;
+export default ({ input, label, type, meta: { touched, error, warning } }) => (
+  <div>
+    <FormLabel>{label}</FormLabel>
+    <div>
+      <FormInput {...input} type={type} />
+      {touched &&
+        ((error && <ErrorMessage>{error}</ErrorMessage>) ||
+          (warning && <ErrorMessage>{warning}</ErrorMessage>))}
+    </div>
+  </div>
+);
