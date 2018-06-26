@@ -1,4 +1,5 @@
 // browser mocks
+// this should be inside polyfill folder
 const localStorageMock = (function() {
   let store = {};
   return {

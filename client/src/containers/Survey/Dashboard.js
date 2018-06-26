@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { submitSurvey } from "actions/survey_actions";
+import { getCurrentUser } from "actions/auth_actions";
+
 class Dashboard extends Component {
   componentDidMount() {
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
+    } else {
+      this.props.getCurrentUser();
     }
   }
 
@@ -27,4 +32,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(Dashboard);
+export default connect(mapStateToProps, { getCurrentUser, submitSurvey })(
+  Dashboard
+);

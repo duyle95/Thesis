@@ -4,6 +4,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const passport = require("passport");
+
+require("./services/passport");
 require("./models/Survey");
 require("./models/User");
 
@@ -18,6 +21,8 @@ mongoose.connect(process.env.MONGO_URI, err => {
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use(passport.initialize());
+// check if we need app.use(passport.session()) and the code above
 require("./routes/authRoutes")(app);
 require("./routes/surveyRoutes")(app);
 

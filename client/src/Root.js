@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import reducers from "reducers";
+import axios from "axios";
 
 import { SIGNIN_USER } from "actions/types";
 
@@ -16,6 +17,7 @@ export default props => {
   );
   const token = localStorage.getItem("token");
   if (token) {
+    axios.defaults.headers.common["authorization"] = token;
     store.dispatch({
       type: SIGNIN_USER,
       payload: {
@@ -23,6 +25,8 @@ export default props => {
         errorMessage: ""
       }
     });
+  } else {
+    delete axios.defaults.headers.common["authorization"];
   }
 
   return <Provider store={store}>{props.children}</Provider>;

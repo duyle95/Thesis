@@ -22,7 +22,7 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
         return done(null, false);
       }
 
-      return done(null, user);
+      return done(null, { email: user.email, id: user._id });
     });
   });
 });
@@ -30,17 +30,16 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader("authorization"),
   secretOrKey: process.env.JWT_SECRET
-  // ignoreExpiration: false
 };
 
 const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
-  User.findById({ id: payload.sub }, (err, user) => {
+  User.findById(payload.sub, (err, user) => {
     if (!user) {
       return done(err, false);
     }
 
     if (user) {
-      return done(null, user);
+      return done(null, { email: user.email, id: user._id });
     } else {
       return done(null, false);
     }

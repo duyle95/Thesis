@@ -6,6 +6,14 @@ const tokenForUser = user => {
   return jwt.sign({ sub: user.id, iat: timestamp }, process.env.JWT_SECRET);
 };
 
+exports.currentUser = (req, res, next) => {
+  if (!req.user) {
+    return res.send({});
+  }
+
+  res.send(req.user);
+};
+
 exports.signin = (req, res, next) => {
   res.json({ token: tokenForUser(req.user) });
 };

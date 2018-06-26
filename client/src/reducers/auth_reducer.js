@@ -2,7 +2,8 @@ import { SIGNUP_USER, SIGNIN_USER, SIGNOUT_USER } from "actions/types";
 
 const INITIAL_STATE = {
   isAuthenticated: false,
-  errorMessage: ""
+  errorMessage: "",
+  user: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
