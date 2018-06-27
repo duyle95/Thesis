@@ -7,4 +7,5 @@ const Survey = mongoose.model("Survey");
 
 module.exports = app => {
   app.post("/api/surveys", requireAuth, survey.postSurvey);
+  app.get("/api/surveys", requireAuth, survey.getSurveys);
 };

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { submitSurvey } from "actions/survey_actions";
+import { fetchSurveys } from "actions/survey_actions";
 import { getCurrentUser } from "actions/auth_actions";
 
 class Dashboard extends Component {
@@ -10,6 +10,7 @@ class Dashboard extends Component {
       this.props.history.push("/");
     } else {
       this.props.getCurrentUser();
+      this.props.fetchSurveys();
     }
   }
 
@@ -32,6 +33,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getCurrentUser, submitSurvey })(
+export default connect(mapStateToProps, { getCurrentUser, fetchSurveys })(
   Dashboard
 );

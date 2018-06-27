@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const recipientsSchema = new Schema({
-  Email: {
+  email: {
     type: String,
     require: true
   },
