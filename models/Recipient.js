@@ -10,7 +10,7 @@ const recipientsSchema = new Schema({
     type: Boolean,
     default: false
   },
-  rate: Number,
+  rating: Number,
   review: String
 });
 

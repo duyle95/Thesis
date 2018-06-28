@@ -6,6 +6,7 @@ import Signup from "containers/Auth/Signup";
 import Signout from "containers/Auth/Signout";
 
 import Dashboard from "containers/Survey/Dashboard";
+import Answer from "containers/Survey/Answer";
 
 import Header from "containers/Header";
 import Landing from "components/Landing";
@@ -21,7 +22,12 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/signin" component={Signin} />
             <Route path="/signout" component={Signout} />
-            <Route path="/surveys" component={Dashboard} />
+            <Route exact path="/surveys" component={Dashboard} />
+            <Route
+              exact
+              path="/surveys/answer/:recipientId"
+              component={Answer}
+            />
           </div>
         </BrowserRouter>
       </div>

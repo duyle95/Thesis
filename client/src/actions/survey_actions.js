@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { SUBMIT_SURVEY, FETCH_SURVEYS } from "actions/types";
+import { SUBMIT_SURVEY, FETCH_SURVEYS, FIND_RECIPIENT } from "actions/types";
 
 export const submitSurvey = survey => async dispatch => {
   const newSurvey = {
@@ -26,6 +26,17 @@ export const fetchSurveys = () => async dispatch => {
 
   try {
     response = await axios.get("/api/surveys");
+    console.log(response.data);
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+export const findRecipient = recipientId => async dispatch => {
+  let response;
+
+  try {
+    response = await axios.get(`/api/recipient/${recipientId}`);
     console.log(response.data);
   } catch (e) {
     throw new Error(e);

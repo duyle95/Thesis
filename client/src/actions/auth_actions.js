@@ -3,7 +3,7 @@ import { SIGNIN_USER, SIGNUP_USER, SIGNOUT_USER } from "actions/types";
 
 export const getCurrentUser = () => async dispatch => {
   try {
-    const response = await axios.get("api/current_user");
+    const response = await axios.get("/api/current_user");
     dispatch({
       type: SIGNIN_USER,
       payload: {

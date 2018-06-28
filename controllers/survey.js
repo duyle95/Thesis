@@ -1,19 +1,39 @@
 const mongoose = require("mongoose");
 const Survey = mongoose.model("Survey");
 
+const sgMail = require("../services/Mailer");
+const emailTemplate = require("../services/emailTemplate");
+
 exports.postSurvey = async (req, res, next) => {
+  // REFACTOR: don't show the list of the recipients in the email => use sendMultiple instead
+  // or consider using a seperate Recipient model, => Promise.all to resolve sending every recipient
   const { title, body, subject, recipients } = req.body;
+
+  const newRecipients = recipients
+    .split(",")
+    .map(email => ({ email: email.trim() }));
+
   const survey = new Survey({
     title,
     subject,
     body,
-    recipients: recipients.split(",").map(email => ({ email: email.trim() })),
+    recipients: newRecipients,
     _user: req.user._id,
     dateSent: Date.now()
   });
 
+  const msg = {
+    from: "test@tooly.com",
+    to: newRecipients,
+    subject,
+    text: body,
+    html: emailTemplate(body, survey._id)
+  };
+
   try {
     await survey.save();
+
+    await sgMail.send(msg);
 
     res.send({ survey });
   } catch (e) {
@@ -26,6 +46,23 @@ exports.getSurveys = async (req, res, next) => {
     const surveys = await Survey.find({ _user: req.user._id });
 
     res.send(surveys);
+  } catch (e) {
+    res.status(422).send(e);
+  }
+};
+
+// REFACTOR: create another collection named 'Recipient' that stores all the rating, review, recipientEmail => change to model
+// create recipient controllers and recipientRoutes
+// consider generate signature for each recipient to avoid hard typing url in front end
+
+exports.getRecipient = async (req, res, next) => {
+  console.log(req.params.id);
+  try {
+    const recipient = await Survey.find({ "recipients._id": req.params.id });
+
+    console.log(recipient);
+
+    res.send(recipient);
   } catch (e) {
     res.status(422).send(e);
   }
