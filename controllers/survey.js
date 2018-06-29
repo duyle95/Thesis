@@ -43,7 +43,7 @@ exports.postSurvey = async (req, res, next) => {
 
 exports.getSurveys = async (req, res, next) => {
   try {
-    const surveys = await Survey.find({ _user: req.user._id });
+    const surveys = await Survey.findOne({ _user: req.user._id });
 
     res.send(surveys);
   } catch (e) {
@@ -56,13 +56,13 @@ exports.getSurveys = async (req, res, next) => {
 // consider generate signature for each recipient to avoid hard typing url in front end
 
 exports.getRecipient = async (req, res, next) => {
-  console.log(req.params.id);
   try {
-    const recipient = await Survey.find({ "recipients._id": req.params.id });
-
-    console.log(recipient);
-
-    res.send(recipient);
+    const recipients = await Survey.findOne(
+      { "recipients._id": req.params.id },
+      "recipients"
+    );
+    console.log(typeof recipients.recipients);
+    res.send(recipients);
   } catch (e) {
     res.status(422).send(e);
   }
