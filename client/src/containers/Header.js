@@ -70,6 +70,7 @@ class Header extends Component {
         <div>
           <StyledLink to="/signout">Sign out</StyledLink>
           <StyledLink to="/surveys">Surveys</StyledLink>
+          <StyledLink to="/surveys/new">Add new survey</StyledLink>
         </div>
       );
     } else {
