@@ -2,20 +2,15 @@ import axios from "axios";
 
 import { SUBMIT_SURVEY, FETCH_SURVEYS, FIND_RECIPIENT } from "actions/types";
 
-export const submitSurvey = survey => async dispatch => {
-  const newSurvey = {
-    title: "new title",
-    subject: "new subject",
-    body: "new body",
-    recipients: "1@mail.com,2@mail.com",
-    id: 1
-  };
+export const submitSurvey = (survey, history) => async dispatch => {
+  console.log(survey);
 
   let response;
 
   try {
-    response = await axios.post("/api/surveys", newSurvey);
+    response = await axios.post("/api/surveys", survey);
     console.log(response.data);
+    // history.push('/surveys');
   } catch (e) {
     throw new Error(e);
   }
@@ -32,11 +27,22 @@ export const fetchSurveys = () => async dispatch => {
   }
 };
 
-export const findRecipient = recipientId => async dispatch => {
+// export const findRecipient = recipientId => async dispatch => {
+//   let response;
+//
+//   try {
+//     response = await axios.get(`/api/recipient/${recipientId}`);
+//     console.log(response.data);
+//   } catch (e) {
+//     throw new Error(e);
+//   }
+// };
+
+export const submitRecipientAnswer = answer => async dispatch => {
   let response;
 
   try {
-    response = await axios.get(`/api/recipient/${recipientId}`);
+    response = await axios.post("/api/recipient/edit", answer);
     console.log(response.data);
   } catch (e) {
     throw new Error(e);

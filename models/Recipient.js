@@ -10,8 +10,18 @@ const recipientsSchema = new Schema({
     type: Boolean,
     default: false
   },
-  rating: Number,
-  review: String
+  rating: {
+    type: String,
+    default: "0"
+  },
+  review: {
+    type: String,
+    default: ""
+  },
+  _survey: {
+    type: Schema.Types.ObjectId,
+    ref: "Survey"
+  }
 });
 
-module.exports = recipientsSchema;
+mongoose.model("Recipient", recipientsSchema);

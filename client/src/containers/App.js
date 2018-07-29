@@ -12,6 +12,8 @@ import SurveyNew from "containers/Survey/SurveyNew";
 import Header from "containers/Header";
 import Landing from "components/Landing";
 
+import isAuthenticated from "HOC/isAuthenticated";
+
 class App extends Component {
   render() {
     return (
@@ -23,8 +25,12 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/signin" component={Signin} />
             <Route path="/signout" component={Signout} />
-            <Route exact path="/surveys" component={Dashboard} />
-            <Route path="/surveys/new" component={SurveyNew} />
+            <Route
+              exact
+              path="/surveys"
+              component={isAuthenticated(Dashboard)}
+            />
+            <Route path="/surveys/new" component={isAuthenticated(SurveyNew)} />
             <Route
               exact
               path="/surveys/answer/:recipientId"

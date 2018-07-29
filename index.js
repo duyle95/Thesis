@@ -9,14 +9,18 @@ const passport = require("passport");
 require("./services/passport");
 require("./models/Survey");
 require("./models/User");
+require("./models/Recipient");
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URI, err => {
-  console.log(err);
-});
+mongoose.connect(
+  process.env.MONGO_URI,
+  err => {
+    console.log(err);
+  }
+);
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -25,6 +29,7 @@ app.use(passport.initialize());
 // check if we need app.use(passport.session()) and the code above
 require("./routes/authRoutes")(app);
 require("./routes/surveyRoutes")(app);
+require("./routes/recipientRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   // the order here is important, if express doesn't find the file,

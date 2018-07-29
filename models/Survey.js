@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const recipientsSchema = require("./Recipient");
 
 const surveySchema = new Schema({
   title: {
@@ -20,8 +19,7 @@ const surveySchema = new Schema({
     ref: "User"
   },
   dateSent: Date,
-  lastResponded: Date,
-  recipients: [recipientsSchema]
+  lastResponded: Date
 });
 
 mongoose.model("Survey", surveySchema);

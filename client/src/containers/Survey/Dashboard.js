@@ -6,12 +6,8 @@ import { getCurrentUser } from "actions/auth_actions";
 
 class Dashboard extends Component {
   componentDidMount() {
-    if (!this.props.isAuthenticated) {
-      this.props.history.push("/");
-    } else {
-      this.props.getCurrentUser();
-      this.props.fetchSurveys();
-    }
+    this.props.getCurrentUser();
+    // this.props.fetchSurveys();
   }
 
   render() {
@@ -33,6 +29,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getCurrentUser, fetchSurveys })(
-  Dashboard
-);
+export default connect(
+  mapStateToProps,
+  { getCurrentUser, fetchSurveys }
+)(Dashboard);

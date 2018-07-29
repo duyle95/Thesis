@@ -8,5 +8,4 @@ const Survey = mongoose.model("Survey");
 module.exports = app => {
   app.post("/api/surveys", requireAuth, survey.postSurvey);
   app.get("/api/surveys", requireAuth, survey.getSurveys);
-  app.get("/api/recipient/:id", survey.getRecipient);
 };
